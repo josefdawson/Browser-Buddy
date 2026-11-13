@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam or Safe? — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="scam.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle">
+        <input type="checkbox" id="jargon-toggle">
+        <span>Use everyday words</span>
+      </label>
+      <a class="settings-link" href="settings.html">?? Settings</a>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+
+  <main class="scam-wrap">
+    <h1>Scam or Safe? 🕵️</h1>
+    <p class="muted">Spot the tricky buttons and interfaces. Pick the safest option in each scene.</p>
+
+    <div class="scam-hud">
+      <div class="scam-stat"><div class="n" id="scam-score">0</div><div class="l">Safe picks</div></div>
+      <div class="scam-stat"><div class="n" id="scam-streak">0</div><div class="l">Streak</div></div>
+      <div class="scam-stat"><div class="n" id="scam-best">0</div><div class="l">Best streak</div></div>
+      <div class="scam-stat"><div class="n" id="scam-round">1 / 8</div><div class="l">Round</div></div>
+    </div>
+
+    <div class="scam-card" id="scam-card">
+      <h2 id="scam-title" style="margin:0 0 6px"></h2>
+      <div class="scam-context" id="scam-context"></div>
+      <div class="scam-scene" id="scam-scene"></div>
+      <div class="scam-feedback" id="scam-feedback"></div>
+      <div class="scam-actions">
+        <button class="btn btn-primary btn-big" id="scam-next" style="display:none">Next round →</button>
+      </div>
+    </div>
+
+    <div class="scam-over" id="scam-over" style="display:none"></div>
+  </main>
+
+  <script src="app.js"></script>\n  <script src="sound.js"></script>
+  <script src="scam.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Banner Speedrun — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Cookie Banner Speedrun 🍪</h1>
+    <p class="muted">Reject unnecessary tracking in as few clicks as possible.</p>
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="cb-score">0</div><div class="l">Rejected</div></div>
+      <div class="game-stat"><div class="n" id="cb-clicks">0</div><div class="l">Clicks</div></div>
+      <div class="game-stat"><div class="n" id="cb-round">1 / 6</div><div class="l">Round</div></div>
+    </div>
+    <div class="game-card">
+      <p class="mission-plain" id="cb-instr"></p>
+      <div class="cb-banner" id="cb-banner"></div>
+    </div>
+    <div class="game-over" id="cb-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="cookie-banner.js"></script>
+</body>
+</html>

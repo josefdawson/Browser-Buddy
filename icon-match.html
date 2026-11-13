@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Match & Mystery Button — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <a class="settings-link" href="settings.html">?? Settings</a>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Icon Match & Mystery Button ⏱️</h1>
+    <p class="muted">A mystery icon appears. Click what it does before time runs out.</p>
+    <div class="mode-toggle">
+      <button class="mode-btn active" data-mode="practice">Practice (no timer)</button>
+      <button class="mode-btn" data-mode="challenge">Challenge (timed)</button>
+    </div>
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="im-score">0</div><div class="l">Correct</div></div>
+      <div class="game-stat"><div class="n" id="im-streak">0</div><div class="l">Streak</div></div>
+      <div class="game-stat"><div class="n" id="im-round">1 / 10</div><div class="l">Round</div></div>
+      <div class="game-stat timer" id="im-timer" style="display:none"><div class="n" id="im-time">8</div><div class="l">Seconds</div></div>
+    </div>
+    <div class="game-card">
+      <div class="im-glyph" id="im-glyph">?</div>
+      <p class="id-quiz-q" id="im-question"></p>
+      <div class="im-options" id="im-options"></div>
+      <div class="id-quiz-feedback" id="im-feedback"></div>
+    </div>
+    <div class="game-over" id="im-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>\n  <script src="sound.js"></script>
+  <script src="icon-match.js"></script>
+</body>
+</html>

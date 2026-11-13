@@ -1,0 +1,121 @@
+/* Scam or Safe? — styles */
+.scam-wrap { max-width: 900px; margin: 0 auto; padding: 20px 24px 60px; }
+
+.scam-hud {
+  display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 18px;
+}
+.scam-stat {
+  background: var(--surface); border-radius: 12px; padding: 10px 16px;
+  box-shadow: var(--shadow); font-weight: 600;
+}
+.scam-stat .n { color: var(--primary-dark); font-size: 1.4rem; }
+.scam-stat .l { color: var(--muted); font-size: .8rem; }
+.scam-streak { background: #fff3e0; color: #7a4a00; }
+
+.scam-card {
+  background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-lg);
+  padding: 22px; margin-bottom: 18px;
+}
+.scam-context { color: var(--muted); margin-bottom: 12px; font-size: .95rem; }
+.scam-context strong { color: var(--ink); }
+
+.scam-scene {
+  border: 2px solid var(--line); border-radius: 12px; overflow: hidden;
+  background: #f7f9fd; min-height: 260px; position: relative;
+}
+.scam-scene .scene-bar {
+  background: #eef1f8; padding: 8px 12px; font-size: .8rem; color: var(--muted);
+  border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px;
+}
+.scam-scene .scene-bar .dots { display: flex; gap: 5px; }
+.scam-scene .scene-bar .dots span { width: 10px; height: 10px; border-radius: 50%; background: #c4cede; display: block; }
+
+.scam-option {
+  cursor: pointer; border: 2px solid transparent; border-radius: 10px;
+  transition: transform .15s, border-color .15s;
+}
+.scam-option:hover { transform: translateY(-2px); border-color: var(--primary); }
+.scam-option.safe-pick { border-color: var(--good); background: #e3f6ec; }
+.scam-option.bad-pick { border-color: var(--bad); background: #fdeaea; }
+.scam-option.reveal-safe { border-color: var(--good); background: #e3f6ec; }
+.scam-option.disabled { pointer-events: none; opacity: .7; }
+
+.scam-feedback {
+  margin-top: 14px; padding: 14px 16px; border-radius: 12px; font-weight: 600;
+}
+.scam-feedback.good { background: var(--good-bg); color: var(--good); }
+.scam-feedback.bad { background: var(--bad-bg); color: var(--bad); }
+.scam-feedback .explain { font-weight: 400; color: var(--ink); margin-top: 6px; font-size: .95rem; }
+.scam-feedback .redflags { margin-top: 8px; font-size: .9rem; color: var(--muted); }
+.scam-feedback .redflags li { margin: 2px 0; }
+
+.scam-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+/* ---------- scene internals ---------- */
+.dl-page { padding: 20px; }
+.dl-page h3 { margin: 0 0 8px; }
+.dl-ad {
+  background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.dl-ad .big { font-size: 1.1rem; font-weight: 700; color: #c93a3a; }
+.dl-ad .sub { font-size: .8rem; color: var(--muted); }
+.dl-real { background: #f0f4fc; border: 1px dashed #9bb0d0; border-radius: 10px; padding: 10px 14px; display: inline-block; font-size: .9rem; }
+
+.cookie-banner {
+  background: #fff; border-top: 2px solid var(--line); padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.cookie-banner .msg { flex: 1; font-size: .9rem; }
+.cookie-btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #eef2fb; cursor: pointer; font-family: inherit; font-weight: 600; font-size: .85rem; }
+.cookie-btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.perm-popup {
+  background: #fff; border-radius: 12px; padding: 18px; max-width: 360px; margin: 20px auto;
+  box-shadow: var(--shadow-lg); text-align: center;
+}
+.perm-popup .ico { font-size: 2.2rem; }
+.perm-popup h4 { margin: 8px 0 4px; }
+.perm-popup p { color: var(--muted); font-size: .9rem; }
+.perm-actions { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
+.perm-actions button { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line); background: #eef2fb; cursor: pointer; font-family: inherit; font-weight: 600; }
+
+.fake-virus {
+  background: #8b0000; color: #fff; padding: 24px; text-align: center;
+}
+.fake-virus h3 { color: #fff; margin: 0 0 8px; }
+.fake-virus p { color: #ffd6d6; }
+.fake-virus .bigbtn { background: #ff0; color: #000; padding: 12px 24px; border-radius: 8px; font-weight: 700; display: inline-block; margin-top: 10px; cursor: pointer; }
+
+.login-fake {
+  background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px; max-width: 360px; margin: 20px auto;
+}
+.login-fake .url { background: #f0f4fc; padding: 6px 10px; border-radius: 8px; font-size: .8rem; color: var(--bad); margin-bottom: 12px; font-family: monospace; }
+.login-fake input { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; font-family: inherit; font-size: 1rem; }
+.login-fake .signin { width: 100%; padding: 10px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: inherit; }
+
+.notif-popup {
+  background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px; max-width: 360px; margin: 20px auto;
+  box-shadow: var(--shadow);
+}
+.notif-popup h4 { margin: 0 0 6px; }
+.notif-popup p { color: var(--muted); font-size: .9rem; }
+.notif-actions { display: flex; gap: 8px; margin-top: 10px; }
+.notif-actions button { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #eef2fb; cursor: pointer; font-family: inherit; font-weight: 600; }
+
+.update-ad {
+  background: #1a2233; color: #fff; padding: 24px; text-align: center; border-radius: 10px;
+}
+.update-ad h3 { color: #fff; }
+.update-ad .bigbtn { background: #ffb020; color: #000; padding: 12px 24px; border-radius: 8px; font-weight: 700; display: inline-block; margin-top: 10px; cursor: pointer; }
+
+.win-page { background: linear-gradient(135deg, #ffb020, #ff6b35); color: #fff; padding: 24px; text-align: center; border-radius: 10px; }
+.win-page h3 { color: #fff; }
+.win-page .bigbtn { background: #fff; color: #c93a3a; padding: 12px 24px; border-radius: 8px; font-weight: 700; display: inline-block; margin-top: 10px; cursor: pointer; }
+
+.scam-over {
+  text-align: center; padding: 40px 20px;
+}
+.scam-over .big { font-size: 3rem; }
+.scam-over h2 { margin: 10px 0; }

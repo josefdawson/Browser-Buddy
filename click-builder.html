@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click-Through Builder — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="click-builder.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle">
+        <input type="checkbox" id="jargon-toggle">
+        <span>Use everyday words</span>
+      </label>
+      <a class="settings-link" href="settings.html">?? Settings</a>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+
+  <main class="cb-wrap">
+    <h1>Click-Through Builder 🧩</h1>
+    <p class="muted">Make your own step-by-step lessons from screenshots. Draw a hotspot where learners should click, add a caption, and share.</p>
+
+    <nav class="cb-tabs">
+      <button class="cb-tab active" data-tab="editor">✏️ Editor</button>
+      <button class="cb-tab" data-tab="player">▶️ Play a lesson</button>
+      <button class="cb-tab" data-tab="library">📚 My lessons</button>
+    </nav>
+
+    <!-- Editor -->
+    <section class="cb-pane active" id="pane-editor">
+      <div class="cb-editor">
+        <div class="cb-side">
+          <label class="cb-label">Lesson name</label>
+          <input type="text" id="cb-name" placeholder="e.g. How to send an email" class="cb-input">
+
+          <label class="cb-label">Caption for this step</label>
+          <input type="text" id="cb-caption" placeholder="e.g. Click the Compose button" class="cb-input">
+
+          <label class="cb-label">Upload a screenshot</label>
+          <input type="file" id="cb-file" accept="image/*" class="cb-input">
+
+          <div class="cb-actions">
+            <button class="btn btn-ghost" id="cb-draw">Draw hotspot</button>
+            <button class="btn btn-primary" id="cb-addstep">Add step</button>
+          </div>
+          <p class="muted" id="cb-hint">Upload an image, then click "Draw hotspot" and drag on the image to mark where to click.</p>
+
+          <div class="cb-steps" id="cb-steps"></div>
+
+          <div class="cb-actions" style="margin-top:14px">
+            <button class="btn btn-primary btn-big" id="cb-save">Save lesson</button>
+            <button class="btn btn-ghost" id="cb-clear">Clear all</button>
+          </div>
+          <p class="muted" id="cb-status"></p>
+        </div>
+
+        <div class="cb-canvas-wrap">
+          <div class="cb-canvas" id="cb-canvas">
+            <img id="cb-img" alt="screenshot" style="display:none">
+            <div id="cb-box" class="cb-box" style="display:none"></div>
+          </div>
+          <p class="muted" id="cb-canvas-hint">Your screenshot appears here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Player -->
+    <section class="cb-pane" id="pane-player">
+      <div class="cb-player">
+        <label class="cb-label">Choose a lesson</label>
+        <select id="cb-play-select" class="cb-input"></select>
+        <button class="btn btn-primary" id="cb-play-start" style="margin-top:10px">Start lesson</button>
+
+        <div class="cb-play-area" id="cb-play-area" style="display:none">
+          <div class="cb-play-canvas" id="cb-play-canvas">
+            <img id="cb-play-img" alt="step">
+            <div id="cb-play-hint" class="cb-box cb-hintbox" style="display:none"></div>
+          </div>
+          <p class="cb-play-caption" id="cb-play-caption"></p>
+          <div class="cb-actions">
+            <button class="btn btn-ghost" id="cb-play-hintbtn">💡 Show me where</button>
+            <span class="muted" id="cb-play-progress"></span>
+          </div>
+          <div class="cb-play-feedback" id="cb-play-feedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Library -->
+    <section class="cb-pane" id="pane-library">
+      <div id="cb-lib-list" class="cb-lib"></div>
+      <p class="muted" id="cb-lib-empty">No saved lessons yet. Create one in the Editor.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>\n  <script src="sound.js"></script>
+  <script src="click-builder.js"></script>
+</body>
+</html>
