@@ -6,8 +6,20 @@ JavaScript. No installs, no build step, no accounts.
 
 ## Run it
 
-Open `index.html` in any web browser (double-click it, or drag it into a browser
-window). That's it.
+**Option 1 (easiest):** Double-click `index.html` to open it in your browser.
+
+**Option 2 (recommended for saving progress):** Serve the folder from a local server
+so progress persists across pages:
+```
+cd "C:\VS Code Folders\Browser Buddy"
+python -m http.server 8123
+```
+Then open http://localhost:8123 in your browser.
+
+> Note: When opening files directly (file://), some browsers don't share saved
+> progress between pages. Using a local server (Option 2) fixes this. Progress is
+> also saved to your browser's storage and can be exported/imported via the
+> Account page.
 
 ## What's inside
 

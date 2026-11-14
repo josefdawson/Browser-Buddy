@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Tech Challenge — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Daily Tech Challenge 📅</h1>
+    <p class="muted">One new scenario every day. Build your streak!</p>
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="dc-streak">0</div><div class="l">Day streak</div></div>
+      <div class="game-stat"><div class="n" id="dc-best">0</div><div class="l">Best streak</div></div>
+      <div class="game-stat"><div class="n" id="dc-date"></div><div class="l">Today</div></div>
+    </div>
+    <div class="game-card">
+      <p class="mission-plain" id="dc-scenario"></p>
+      <div id="dc-area" style="min-height:120px;margin-top:10px"></div>
+      <div class="game-actions" style="margin-top:12px">
+        <button class="btn btn-primary btn-big" id="dc-submit" style="display:none">Submit answer</button>
+      </div>
+    </div>
+    <div class="game-over" id="dc-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="daily-challenge.js"></script>
+</body>
+</html>

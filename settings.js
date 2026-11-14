@@ -14,6 +14,33 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Theme settings
+    const themeSelect = $("#set-theme");
+    const cursorSelect = $("#set-cursor");
+    function applyTheme() {
+      let theme = "default", cursor = "default";
+      try { theme = localStorage.getItem("bb-theme") || "default"; } catch (e) {}
+      try { cursor = localStorage.getItem("bb-cursor") || "default"; } catch (e) {}
+      document.body.classList.remove("theme-dark", "theme-retro", "theme-neon", "cursor-big", "cursor-star", "cursor-heart");
+      if (theme !== "default") document.body.classList.add("theme-" + theme);
+      if (cursor !== "default") document.body.classList.add("cursor-" + cursor);
+      if (themeSelect) themeSelect.value = theme;
+      if (cursorSelect) cursorSelect.value = cursor;
+    }
+    applyTheme();
+    if (themeSelect) {
+      themeSelect.addEventListener("change", () => {
+        try { localStorage.setItem("bb-theme", themeSelect.value); } catch (e) {}
+        applyTheme();
+      });
+    }
+    if (cursorSelect) {
+      cursorSelect.addEventListener("change", () => {
+        try { localStorage.setItem("bb-cursor", cursorSelect.value); } catch (e) {}
+        applyTheme();
+      });
+    }
+
     // Sound settings
     const soundToggle = $("#set-sound");
     const voiceToggle = $("#set-voice");

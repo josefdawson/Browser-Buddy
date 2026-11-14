@@ -326,6 +326,82 @@
       ],
       done: "Location access is off. Apps can't see where you are now.",
     },
+
+    /* ---------- Pretend chat ---------- */
+    {
+      id: "sim-chat-send",
+      app: "chat",
+      title: "Send a chat message",
+      plain: "Practice sending a message in a chat app.",
+      steps: [
+        { action: "contact-mom", text: 'Click "Mom" in the contacts list.' },
+        { action: "chat-send", text: "Type a message and click Send. (Type anything.)" },
+      ],
+      done: "Message sent! Chat apps work just like texting.",
+    },
+    {
+      id: "sim-chat-switch",
+      app: "chat",
+      title: "Switch conversations",
+      plain: "Practice switching between chat contacts.",
+      steps: [
+        { action: "contact-bob", text: 'Click "Uncle Bob" in the contacts list.' },
+        { action: "contact-sarah", text: 'Click "Sarah" in the contacts list.' },
+        { action: "contact-mom", text: 'Click "Mom" to go back.' },
+      ],
+      done: "You switched between conversations. Easy!",
+    },
+    {
+      id: "sim-chat-attach",
+      app: "chat",
+      title: "Attach a file in chat",
+      plain: "Practice attaching a file to a message.",
+      steps: [
+        { action: "contact-mom", text: 'Click "Mom" in the contacts list.' },
+        { action: "chat-attach", text: 'Click the paperclip (📎) to attach a file.' },
+      ],
+      done: "Attachment option opened. In a real app, you'd pick a file.",
+    },
+
+    /* ---------- Pretend phone ---------- */
+    {
+      id: "sim-phone-dial",
+      app: "phone",
+      title: "Make a phone call",
+      plain: "Practice dialing a number and calling.",
+      steps: [
+        { action: "phone-call", text: 'Tap the "Call" app icon.' },
+        { action: "key-5", text: "Press a number on the keypad." },
+        { action: "phone-dial", text: 'Tap "Call" to dial.' },
+      ],
+      done: "Call started! Tap Hang up when you're done.",
+    },
+    {
+      id: "sim-phone-hangup",
+      app: "phone",
+      title: "End a call",
+      plain: "Practice hanging up a call.",
+      steps: [
+        { action: "phone-call", text: 'Tap the "Call" app icon.' },
+        { action: "key-1", text: "Press a number." },
+        { action: "phone-dial", text: 'Tap "Call".' },
+        { action: "phone-hangup", text: 'Tap "Hang up" to end the call.' },
+      ],
+      done: "Call ended. You hung up successfully!",
+    },
+    {
+      id: "sim-phone-mute",
+      app: "phone",
+      title: "Mute during a call",
+      plain: "Practice muting yourself during a call.",
+      steps: [
+        { action: "phone-call", text: 'Tap the "Call" app icon.' },
+        { action: "key-2", text: "Press a number." },
+        { action: "phone-dial", text: 'Tap "Call".' },
+        { action: "phone-mute", text: 'Tap "Mute" during the call.' },
+      ],
+      done: "You muted yourself. Tap Mute again to unmute.",
+    },
   ];
 
   /* =========================================================
@@ -370,9 +446,46 @@
     };
   }
 
+  function freshChat() {
+    return {
+      contact: "mom",
+      messages: {
+        mom: [
+          { from: "Mom", text: "Hi! How are you?", mine: false },
+          { from: "Me", text: "I'm good, thanks!", mine: true },
+        ],
+        bob: [
+          { from: "Uncle Bob", text: "Check out this photo!", mine: false, hasPhoto: true },
+        ],
+        sarah: [
+          { from: "Sarah", text: "Happy birthday! 🎂", mine: false },
+        ],
+        group: [
+          { from: "Mom", text: "Family dinner Sunday?", mine: false },
+          { from: "Uncle Bob", text: "I'll be there!", mine: false },
+        ],
+      },
+      selectedMsg: null,
+    };
+  }
+
+  function freshPhone() {
+    return {
+      screen: "home", // home, dialer, calling
+      number: "",
+      caller: "",
+      muted: false,
+      speaker: false,
+      timer: 0,
+      timerInterval: null,
+    };
+  }
+
   let appState = {
     email: freshEmail(),
     browser: freshBrowser(),
+    chat: freshChat(),
+    phone: freshPhone(),
     settings: freshSettings(),
   };
 
@@ -393,6 +506,8 @@
   function renderApp() {
     if (activeApp === "email") renderEmail();
     else if (activeApp === "browser") renderBrowser();
+    else if (activeApp === "chat") renderChat();
+    else if (activeApp === "phone") renderPhone();
     else renderSettings();
   }
 
@@ -544,6 +659,59 @@
     }
   }
 
+  /* ---------- Fake chat ---------- */
+  const CHAT_CONTACTS = {
+    mom: "Mom",
+    bob: "Uncle Bob",
+    sarah: "Sarah",
+    group: "Family Group",
+  };
+
+  function renderChat() {
+    const s = appState.chat;
+    // contacts
+    $$(".chat-contact").forEach((btn) => {
+      const c = btn.dataset.action.replace("contact-", "");
+      btn.classList.toggle("active", c === s.contact);
+    });
+    // header
+    $("#chat-header").textContent = CHAT_CONTACTS[s.contact] || s.contact;
+    // messages
+    const msgs = $("#chat-messages");
+    msgs.innerHTML = "";
+    (s.messages[s.contact] || []).forEach((m) => {
+      const el = document.createElement("div");
+      el.className = "chat-msg " + (m.mine ? "mine" : "theirs");
+      el.innerHTML = escapeHtml(m.text) + (m.hasPhoto ? " 📷" : "") + '<div class="meta">' + m.from + "</div>";
+      msgs.appendChild(el);
+    });
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  /* ---------- Fake phone ---------- */
+  function renderPhone() {
+    const s = appState.phone;
+    const dialer = $("#phone-dialer");
+    const callScreen = $("#phone-call-screen");
+    const apps = document.querySelector(".phone-apps");
+    if (s.screen === "home") {
+      if (apps) apps.style.display = "grid";
+      if (dialer) dialer.style.display = "none";
+      if (callScreen) callScreen.style.display = "none";
+    } else if (s.screen === "dialer") {
+      if (apps) apps.style.display = "none";
+      if (dialer) dialer.style.display = "block";
+      if (callScreen) callScreen.style.display = "none";
+      $("#phone-number").textContent = s.number || "";
+    } else if (s.screen === "calling") {
+      if (apps) apps.style.display = "none";
+      if (dialer) dialer.style.display = "none";
+      if (callScreen) callScreen.style.display = "block";
+      $("#phone-caller").textContent = s.caller;
+      $("#phone-timer").textContent = s.timer + "s";
+    }
+  }
+
   /* ---------- Mission panel + list ---------- */
   function renderMissionPanel() {
     const panel = $("#mission-panel");
@@ -584,7 +752,7 @@
 
   function renderMissionList() {
     const wrap = $("#mission-list");
-    const names = { email: "Pretend email", browser: "Pretend web browser", settings: "Pretend settings" };
+    const names = { email: "Pretend email", browser: "Pretend web browser", chat: "Pretend chat", phone: "Pretend phone", settings: "Pretend settings" };
     let html = "<h3>Missions — " + names[activeApp] + "</h3>";
     html += '<div class="mission-list-items">';
 
@@ -617,6 +785,8 @@
   function resetApp(app) {
     if (app === "email") appState.email = freshEmail();
     else if (app === "browser") appState.browser = freshBrowser();
+    else if (app === "chat") appState.chat = freshChat();
+    else if (app === "phone") appState.phone = freshPhone();
     else if (app === "settings") appState.settings = freshSettings();
     renderApp();
   }
@@ -625,7 +795,7 @@
     activeApp = app;
     $$(".app-pane").forEach((p) => p.classList.toggle("active", p.dataset.app === app));
     $$(".app-tab").forEach((t) => t.classList.toggle("active", t.dataset.app === app));
-    const names = { email: "Practice Mail", browser: "Practice Browser", settings: "Practice Settings" };
+    const names = { email: "Practice Mail", browser: "Practice Browser", chat: "Practice Chat", phone: "Practice Phone", settings: "Practice Settings" };
     $("#app-title").textContent = names[app];
     renderApp();
     renderMissionList();
@@ -670,6 +840,7 @@
     const m = currentMission;
     if (typeof Sound !== "undefined") { Sound.complete(); Sound.confetti(); }
     if (typeof Sound !== "undefined") Sound.speak("You did it! " + m.done);
+    BB.completeMission(m.id);
     BB.renderProgressChip();
     BB.hideHint();
     currentMission = null;
@@ -905,7 +1076,111 @@
       }
 
       /* ---------------- SETTINGS ---------------- */
-      case "cat-display":
+      /* ---------------- CHAT ---------------- */
+    case "contact-mom":
+    case "contact-bob":
+    case "contact-sarah":
+    case "contact-group": {
+      appState.chat.contact = action.replace("contact-", "");
+      renderChat();
+      break;
+    }
+    case "chat-send": {
+      const input = document.querySelector("#chat-input");
+      const text = input.value.trim();
+      if (!text) { BB.toast("Type a message first.", "warn"); break; }
+      const s = appState.chat;
+      if (!s.messages[s.contact]) s.messages[s.contact] = [];
+      s.messages[s.contact].push({ from: "Me", text: text, mine: true });
+      input.value = "";
+      renderChat();
+      BB.toast("Sent!", "good", 1000);
+      break;
+    }
+    case "chat-attach": {
+      BB.toast("Practice only — nothing is really attached.", "info");
+      break;
+    }
+    case "chat-emoji": {
+      BB.toast("Practice only — emoji picker would open here.", "info");
+      break;
+    }
+
+    /* ---------------- PHONE ---------------- */
+    case "phone-call": {
+      appState.phone.screen = "dialer";
+      appState.phone.number = "";
+      renderPhone();
+      break;
+    }
+    case "phone-msg": {
+      BB.toast("Practice only — messages app would open here.", "info");
+      break;
+    }
+    case "phone-cam": {
+      BB.toast("Practice only — camera would open here.", "info");
+      break;
+    }
+    case "phone-settings": {
+      BB.toast("Practice only — phone settings would open here.", "info");
+      break;
+    }
+    case "phone-back": {
+      appState.phone.screen = "home";
+      renderPhone();
+      break;
+    }
+    case "phone-dial": {
+      const s = appState.phone;
+      if (!s.number) { BB.toast("Enter a number first.", "warn"); break; }
+      s.screen = "calling";
+      s.caller = s.number;
+      s.timer = 0;
+      if (s.timerInterval) clearInterval(s.timerInterval);
+      s.timerInterval = setInterval(() => {
+        s.timer++;
+        const el = document.querySelector("#phone-timer");
+        if (el) el.textContent = Math.floor(s.timer / 60) + ":" + String(s.timer % 60).padStart(2, "0");
+      }, 1000);
+      renderPhone();
+      BB.toast("Calling " + s.number + "...", "info");
+      break;
+    }
+    case "phone-mute": {
+      appState.phone.muted = !appState.phone.muted;
+      renderPhone();
+      BB.toast(appState.phone.muted ? "Muted." : "Unmuted.", "info", 1000);
+      break;
+    }
+    case "phone-speaker": {
+      appState.phone.speaker = !appState.phone.speaker;
+      renderPhone();
+      BB.toast(appState.phone.speaker ? "Speaker on." : "Speaker off.", "info", 1000);
+      break;
+    }
+    case "phone-hangup": {
+      const s = appState.phone;
+      if (s.timerInterval) clearInterval(s.timerInterval);
+      s.screen = "home";
+      s.number = "";
+      s.caller = "";
+      s.timer = 0;
+      renderPhone();
+      BB.toast("Call ended.", "info", 1000);
+      break;
+    }
+    case "key-0": case "key-1": case "key-2": case "key-3": case "key-4":
+    case "key-5": case "key-6": case "key-7": case "key-8": case "key-9":
+    case "key-star": case "key-hash": {
+      const digit = action.replace("key-", "");
+      const map = { star: "*", hash: "#" };
+      appState.phone.number += map[digit] || digit;
+      renderPhone();
+      break;
+    }
+
+    /* ---------------- SETTINGS ---------------- */
+    case "cat-display":
       case "cat-sound":
       case "cat-privacy": {
         appState.settings.panel = action.replace("cat-", "");

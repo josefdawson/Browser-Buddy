@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaos Mode — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Chaos Mode 🌀</h1>
+    <p class="muted">Fast-paced gauntlet. Random tasks back-to-back. 3 lives. Shrinking timer. How long can you survive?</p>
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="cm-lives">❤️❤️❤️</div><div class="l">Lives</div></div>
+      <div class="game-stat"><div class="n" id="cm-score">0</div><div class="l">Score</div></div>
+      <div class="game-stat"><div class="n" id="cm-streak">0</div><div class="l">Streak</div></div>
+      <div class="game-stat timer" id="cm-timer"><div class="n" id="cm-time">10</div><div class="l">Seconds</div></div>
+    </div>
+    <div class="game-card">
+      <p class="mission-plain" id="cm-instr"></p>
+      <div id="cm-area" style="min-height:120px;margin-top:10px"></div>
+    </div>
+    <div class="game-over" id="cm-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="chaos-mode.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .cert-wrap { max-width: 700px; margin: 0 auto; padding: 20px 24px 60px; text-align: center; }
+    .cert { background: #fff; border: 8px solid var(--primary); border-radius: 12px; padding: 40px 30px; box-shadow: var(--shadow-lg); margin: 20px 0; }
+    .cert h1 { font-size: 2rem; color: var(--primary-dark); margin: 0 0 8px; }
+    .cert .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 24px; }
+    .cert .name { font-size: 1.6rem; font-weight: 700; color: var(--ink); margin: 16px 0; border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+    .cert .title { font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); margin: 16px 0; }
+    .cert .desc { color: var(--muted); font-size: .95rem; margin: 16px 0; }
+    .cert .date { color: var(--muted); font-size: .85rem; margin-top: 20px; }
+    .cert .seal { font-size: 3rem; margin: 16px 0; }
+    @media print { .no-print { display: none; } .cert { box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <header class="topbar no-print">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="cert-wrap">
+    <h1>Certificate 🏆</h1>
+    <p class="muted no-print">Complete 100% of Browser Buddy to earn your certificate.</p>
+
+    <div class="cert" id="cert">
+      <div class="seal">🏆</div>
+      <h1>Certificate of Achievement</h1>
+      <p class="subtitle">This certifies that</p>
+      <div class="name" id="cert-name">Tech Hero</div>
+      <p class="subtitle">has successfully completed</p>
+      <div class="title">Browser Buddy</div>
+      <p class="desc">Demonstrating mastery of everyday technology skills including email, web browsing, settings, digital safety, and more.</p>
+      <p class="date" id="cert-date"></p>
+    </div>
+
+    <div class="no-print" style="margin-top:16px">
+      <label style="font-weight:600;margin-right:8px">Your name:</label>
+      <input type="text" id="cert-nameinput" placeholder="Enter your name" style="padding:8px 12px;border:2px solid var(--line);border-radius:10px;font-size:1rem;font-family:inherit">
+      <button class="btn btn-primary" id="cert-update" style="margin-left:8px">Update</button>
+      <button class="btn btn-ghost" id="cert-print" style="margin-left:8px">🖨️ Print / Save</button>
+    </div>
+
+    <div class="no-print" style="margin-top:16px">
+      <p class="muted" id="cert-status"></p>
+    </div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="certificate.js"></script>
+</body>
+</html>

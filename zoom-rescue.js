@@ -89,7 +89,7 @@
 
   function endGame() {
     if (typeof Sound !== "undefined") { Sound.complete(); Sound.confetti(); }
-    const over = $("#zr-over");
+        const over = $("#zr-over");
     over.style.display = "block";
     const pct = Math.round((score / total) * 100);
     let msg = "Good start.";

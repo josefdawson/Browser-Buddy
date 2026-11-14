@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NXK54PF5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings — Browser Buddy</title>
   <link rel="stylesheet" href="styles.css">
@@ -16,6 +25,7 @@
         <input type="checkbox" id="jargon-toggle">
         <span>Use everyday words</span>
       </label>
+      <a class="settings-link" href="account.html">Account</a>
       <a class="settings-link" href="settings.html">?? Settings</a>
       <span class="progress-chip" id="progress-chip">0 missions done</span>
     </div>
@@ -24,6 +34,34 @@
   <main class="set-wrap">
     <h1>Settings ⚙️</h1>
     <p class="muted">Customize Browser Buddy. All settings are saved on this device.</p>
+
+    <div class="set-card">
+      <h2>Theme</h2>
+      <div class="set-row">
+        <div>
+          <strong>Color theme</strong>
+          <p>Change the look of Browser Buddy.</p>
+        </div>
+        <select id="set-theme" class="cb-input" style="width:160px">
+          <option value="default">Default (blue)</option>
+          <option value="dark">Dark mode</option>
+          <option value="retro">Retro (Windows 95)</option>
+          <option value="neon">Neon (cyberpunk)</option>
+        </select>
+      </div>
+      <div class="set-row">
+        <div>
+          <strong>Custom cursor</strong>
+          <p>Change your mouse pointer.</p>
+        </div>
+        <select id="set-cursor" class="cb-input" style="width:160px">
+          <option value="default">Default</option>
+          <option value="big">Big arrow</option>
+          <option value="star">Star</option>
+          <option value="heart">Heart</option>
+        </select>
+      </div>
+    </div>
 
     <div class="set-card">
       <h2>Appearance</h2>
@@ -102,14 +140,29 @@
     </div>
 
     <div class="set-card">
+      <h2>Admin</h2>
+      <div class="set-row">
+        <div>
+          <strong>Admin panel</strong>
+          <p>Manage bans and view live users. Requires login.</p>
+        </div>
+        <a class="btn btn-ghost" href="login.html">Admin login</a>
+      </div>
+    </div>
+
+    <div class="set-card">
       <h2>About</h2>
       <p><strong>Browser Buddy</strong> — a friendly place to practice everyday tech.</p>
-      <p class="muted">Version 1.0 · All data stays on this device. Nothing is sent anywhere.</p>
+      <p class="muted">Version 1.1 · All data stays on this device. Nothing is sent anywhere.</p>
       <p class="muted">Made with plain HTML, CSS, and JavaScript. No installs, no accounts.</p>
     </div>
   </main>
 
-  <script src="app.js"></script>\n  <script src="sound.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+<script src="sound.js"></script>
+<script src="presence.js"></script>
   <script src="settings.js"></script>
 </body>
 </html>

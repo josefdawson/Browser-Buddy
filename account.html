@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+
+  <main class="login-wrap">
+    <div class="login-card">
+      <h1>Account 🔐</h1>
+      <p class="muted">Sign up or log in to save your progress across devices.</p>
+
+      <div id="account-tabs" style="display:flex;gap:8px;margin-bottom:16px">
+        <button class="btn btn-primary" id="tab-signup" style="flex:1">Sign up</button>
+        <button class="btn btn-ghost" id="tab-login" style="flex:1">Log in</button>
+      </div>
+
+      <div id="account-form">
+        <label class="cb-label">Email</label>
+        <input type="email" id="acct-email" placeholder="you@example.com" class="cb-input">
+
+        <label class="cb-label">Password</label>
+        <input type="password" id="acct-pw" placeholder="••••••••" class="cb-input">
+
+        <div class="game-actions" style="margin-top:16px">
+          <button class="btn btn-primary btn-big" id="acct-btn">Sign up</button>
+        </div>
+
+        <p class="muted" id="acct-msg" style="margin-top:12px;color:var(--bad)"></p>
+      </div>
+
+      <div id="account-logged" style="display:none">
+        <p>Logged in as <strong id="acct-user"></strong></p>
+        <div class="game-actions" style="margin-top:12px">
+          <button class="btn btn-ghost" id="acct-logout">Log out</button>
+          <button class="btn btn-primary" id="acct-savedata">Save data (download)</button>
+          <button class="btn btn-ghost" id="acct-loaddata">Load data (upload)</button>
+        </div>
+
+        <div style="margin-top:16px;border-top:1px solid var(--line);padding-top:16px">
+          <label class="cb-label">Redeem a reward code</label>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="acct-redeem" placeholder="Paste code here..." class="cb-input" style="flex:1">
+            <button class="btn btn-primary" id="acct-redeembtn">Redeem</button>
+          </div>
+          <p class="muted" id="acct-redeemmsg" style="margin-top:8px"></p>
+        </div>
+        <input type="file" id="acct-file" accept=".json" style="display:none">
+        <p class="muted" id="acct-info" style="margin-top:12px"></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="account.js"></script>
+</body>
+</html>

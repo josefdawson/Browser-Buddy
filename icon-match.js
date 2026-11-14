@@ -117,7 +117,7 @@
 
   function endGame() {
     if (typeof Sound !== "undefined") { Sound.complete(); Sound.confetti(); }
-    running = false;
+        running = false;
     clearInterval(timer);
     if (typeof Sound !== "undefined") { Sound.complete(); Sound.confetti(); }
     const over = $("#im-over");

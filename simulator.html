@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NXK54PF5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Safe-Mode Simulator — Browser Buddy</title>
   <link rel="stylesheet" href="styles.css">
@@ -16,6 +25,7 @@
         <input type="checkbox" id="jargon-toggle">
         <span>Use everyday words</span>
       </label>
+      <a class="settings-link" href="account.html">Account</a>
       <a class="settings-link" href="settings.html">?? Settings</a>
       <span class="progress-chip" id="progress-chip">0 missions done</span>
     </div>
@@ -29,6 +39,8 @@
   <nav class="app-tabs" aria-label="Choose a practice app">
     <button class="app-tab active" data-app="email">📧 <span data-jargon="Email" data-plain="Pretend email">Email</span></button>
     <button class="app-tab" data-app="browser">🌐 <span data-jargon="Browser" data-plain="Pretend web browser">Browser</span></button>
+    <button class="app-tab" data-app="chat">💬 <span data-jargon="Chat" data-plain="Pretend chat">Chat</span></button>
+    <button class="app-tab" data-app="phone">📞 <span data-jargon="Phone" data-plain="Pretend phone">Phone</span></button>
     <button class="app-tab" data-app="settings">⚙️ <span data-jargon="Settings" data-plain="Pretend settings">Settings</span></button>
   </nav>
 
@@ -104,6 +116,62 @@
           <div class="browser-content" id="browser-content"></div>
         </div>
 
+        <!-- ============ FAKE CHAT ============ -->
+        <div class="app-pane" data-app="chat" id="pane-chat">
+          <div class="chat-sidebar">
+            <div class="chat-logo">💬 Practice Chat</div>
+            <button class="chat-contact active" data-action="contact-mom">Mom</button>
+            <button class="chat-contact" data-action="contact-bob">Uncle Bob</button>
+            <button class="chat-contact" data-action="contact-sarah">Sarah</button>
+            <button class="chat-contact" data-action="contact-group">Family Group</button>
+          </div>
+          <div class="chat-main">
+            <div class="chat-header" id="chat-header">Mom</div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-row">
+              <input type="text" id="chat-input" placeholder="Type a message..." class="chat-input">
+              <button data-action="chat-send">Send</button>
+              <button data-action="chat-attach">📎</button>
+              <button data-action="chat-emoji">😊</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ FAKE PHONE ============ -->
+        <div class="app-pane" data-app="phone" id="pane-phone">
+          <div class="phone-screen">
+            <div class="phone-status">📶 100%  🔋 85%</div>
+            <div class="phone-apps">
+              <button class="phone-app" data-action="phone-call">📞 Call</button>
+              <button class="phone-app" data-action="phone-msg">💬 Messages</button>
+              <button class="phone-app" data-action="phone-cam">📷 Camera</button>
+              <button class="phone-app" data-action="phone-settings">⚙️ Settings</button>
+            </div>
+            <div class="phone-dialer" id="phone-dialer" style="display:none">
+              <div class="phone-number" id="phone-number"></div>
+              <div class="phone-keypad">
+                <button data-action="key-1">1</button><button data-action="key-2">2</button><button data-action="key-3">3</button>
+                <button data-action="key-4">4</button><button data-action="key-5">5</button><button data-action="key-6">6</button>
+                <button data-action="key-7">7</button><button data-action="key-8">8</button><button data-action="key-9">9</button>
+                <button data-action="key-star">*</button><button data-action="key-0">0</button><button data-action="key-hash">#</button>
+              </div>
+              <div class="phone-actions">
+                <button data-action="phone-dial" class="phone-dial-btn">📞 Call</button>
+                <button data-action="phone-back" class="phone-back-btn">← Back</button>
+              </div>
+            </div>
+            <div class="phone-call-screen" id="phone-call-screen" style="display:none">
+              <div class="phone-caller" id="phone-caller"></div>
+              <div class="phone-call-timer" id="phone-timer">0:00</div>
+              <div class="phone-call-actions">
+                <button data-action="phone-mute">🔇 Mute</button>
+                <button data-action="phone-speaker">🔊 Speaker</button>
+                <button data-action="phone-hangup">📞 Hang up</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ============ FAKE SETTINGS ============ -->
         <div class="app-pane" data-app="settings" id="pane-settings">
           <div class="settings-sidebar">
@@ -120,7 +188,11 @@
 
   </main>
 
-  <script src="app.js"></script>\n  <script src="sound.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+<script src="sound.js"></script>
+<script src="presence.js"></script>
   <script src="simulator.js"></script>
 </body>
 </html>

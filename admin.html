@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <span class="progress-chip" id="progress-chip">Admin</span>
+      <button class="btn btn-ghost" id="admin-logout" style="padding:6px 12px;font-size:.85rem">Log out</button>
+    </div>
+  </header>
+
+  <main class="admin-wrap">
+    <h1>Admin Panel 🔐</h1>
+    <p class="muted">Manage access and monitor live users.</p>
+
+    <div class="admin-card">
+      <h2>Live Users <span class="admin-badge" id="admin-livecount">0</span></h2>
+      <p class="muted">People currently on the site (simulated).</p>
+      <div id="admin-livelist" class="admin-list"></div>
+    </div>
+
+    <div class="admin-card">
+      <h2>Banned Emails</h2>
+      <p class="muted">Banned emails cannot access the site.</p>
+      <div class="admin-row">
+        <input type="email" id="admin-baninput" placeholder="email@example.com" class="cb-input" style="flex:1">
+        <button class="btn btn-primary" id="admin-banbtn">Ban</button>
+      </div>
+      <div id="admin-banlist" class="admin-list" style="margin-top:12px"></div>
+    </div>
+
+    <div class="admin-card">
+      <h2>Give Reward</h2>
+      <p class="muted">Give coins and XP to a user by email. Generates a redeem code they can use.</p>
+      <div class="admin-row">
+        <input type="email" id="admin-reward-email" placeholder="user@example.com" class="cb-input" style="flex:1">
+      </div>
+      <div class="admin-row">
+        <input type="number" id="admin-reward-coins" placeholder="Coins" class="cb-input" style="width:120px" min="0" value="100">
+        <input type="number" id="admin-reward-xp" placeholder="XP" class="cb-input" style="width:120px" min="0" value="250">
+        <button class="btn btn-primary" id="admin-rewardbtn">Generate code</button>
+      </div>
+      <div id="admin-rewardcode" style="margin-top:10px;font-family:monospace;background:#f0f4fc;padding:10px;border-radius:8px;display:none;word-break:break-all"></div>
+      <p class="muted" style="margin-top:8px">Share this code with the user. They can redeem it on their Account page.</p>
+    </div>
+
+    <div class="admin-card">
+      <h2>Site Stats</h2>
+      <div id="admin-stats"></div>
+    </div>
+
+    <div class="admin-card" id="admin-setup" style="display:none">
+      <h2>Firebase Setup (for real tracking)</h2>
+      <p class="muted">To enable real live user tracking:</p>
+      <ol style="color:var(--muted);font-size:.9rem;line-height:1.8">
+        <li>Go to <a href="https://console.firebase.google.com" target="_blank" rel="noopener">console.firebase.google.com</a> and create a free project.</li>
+        <li>Enable <strong>Realtime Database</strong> (start in test mode for simplicity).</li>
+        <li>Copy your Firebase config from Project Settings.</li>
+        <li>Open <code>presence.js</code> and replace the <code>FIREBASE_CONFIG</code> values.</li>
+        <li>Set database rules to allow read/write: <code>{ "rules": { "presence": { ".read": true, ".write": true } } }</code></li>
+        <li>Redeploy your site.</li>
+      </ol>
+      <p class="muted" style="margin-top:8px">Until configured, live users show as "Firebase not configured."</p>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+<script src="sound.js"></script>
+<script src="presence.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

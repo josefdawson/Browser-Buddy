@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trophy Room — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Trophy Room 🏆</h1>
+    <p class="muted">Your lifetime stats and achievement badges.</p>
+    <div class="game-hud" id="tr-stats"></div>
+    <h2 style="margin-top:20px">Badges</h2>
+    <div id="tr-badges" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px"></div>
+    <h2 style="margin-top:24px">Lifetime Metrics</h2>
+    <div id="tr-metrics" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="trophy-room.js"></script>
+</body>
+</html>

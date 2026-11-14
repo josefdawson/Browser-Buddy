@@ -273,7 +273,7 @@
   }
 
   function showOver() {
-    $("#scam-card").style.display = "none";
+        $("#scam-card").style.display = "none";
     const over = $("#scam-over");
     over.style.display = "block";
     const pct = Math.round((score / SCENARIOS.length) * 100);

@@ -7,11 +7,24 @@
 
     /* ---------- Progress (saved in the browser) ---------- */
     getProgress() {
-      try {
-        return JSON.parse(localStorage.getItem("bb-progress") || "[]");
-      } catch (e) {
-        return [];
+      let raw = null;
+      try { raw = localStorage.getItem("bb-progress"); } catch (e) {}
+      if (!raw) {
+        try {
+          const wn = window.name || "";
+          const m = wn.match(/bb_progress=([^;]+)/);
+          if (m) raw = decodeURIComponent(m[1]);
+        } catch (e) {}
       }
+      if (!raw) {
+        // Try cookie fallback
+        try {
+          const m = document.cookie.match(/bb_progress=([^;]+)/);
+          if (m) raw = decodeURIComponent(m[1]);
+        } catch (e) {}
+      }
+      if (!raw) return [];
+      try { return JSON.parse(raw) || []; } catch (e) { return []; }
     },
     isDone(id) {
       return this.getProgress().includes(id);
@@ -21,9 +34,16 @@
         const p = this.getProgress();
         if (!p.includes(id)) p.push(id);
         localStorage.setItem("bb-progress", JSON.stringify(p));
-      } catch (e) {
-        /* storage can be blocked (e.g. some file:// or private modes) */
-      }
+      } catch (e) {}
+      try {
+        const wn = window.name || "";
+        const cleaned = wn.replace(/bb_progress=[^;]*;?/, "").trim();
+        window.name = (cleaned ? cleaned + ";" : "") + "bb_progress=" + encodeURIComponent(JSON.stringify(p));
+      } catch (e) {}
+      // Cookie fallback
+      try {
+        document.cookie = "bb_progress=" + encodeURIComponent(JSON.stringify(p)) + ";path=/;max-age=31536000";
+      } catch (e) {}
     },
 
     /* ---------- Toast (little pop-up messages) ---------- */
@@ -117,6 +137,13 @@
   window.BB = BB;
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Apply saved theme
+    try {
+      const theme = localStorage.getItem("bb-theme");
+      const cursor = localStorage.getItem("bb-cursor");
+      if (theme && theme !== "default") document.body.classList.add("theme-" + theme);
+      if (cursor && cursor !== "default") document.body.classList.add("cursor-" + cursor);
+    } catch (e) {}
     BB.applyJargonMode();
     BB.renderProgressChip();
 

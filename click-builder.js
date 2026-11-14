@@ -67,6 +67,55 @@
   function initEditor() {
     $("#cb-file").addEventListener("change", (e) => loadImageFile(e.target.files[0]));
 
+    function loadTemplate(type) {
+      const c = document.createElement("canvas");
+      c.width = 800; c.height = 500;
+      const ctx = c.getContext("2d");
+      ctx.fillStyle = "#f0f4fc"; ctx.fillRect(0, 0, 800, 500);
+      if (type === "browser") {
+        ctx.fillStyle = "#e8edf7"; ctx.fillRect(0, 0, 800, 40);
+        ctx.fillStyle = "#3b5bfd"; ctx.fillRect(10, 8, 60, 24);
+        ctx.fillStyle = "#fff"; ctx.font = "12px sans-serif"; ctx.fillText("← → ↻", 18, 24);
+        ctx.fillStyle = "#fff"; ctx.fillRect(80, 8, 500, 24);
+        ctx.fillStyle = "#56617a"; ctx.fillText("https://example.com", 90, 24);
+        ctx.fillStyle = "#e0e8f8"; ctx.fillRect(0, 40, 800, 30);
+        ctx.fillStyle = "#17203a"; ctx.font = "14px sans-serif"; ctx.fillText("Home  |  About  |  Contact  |  Login", 20, 60);
+        ctx.fillStyle = "#17203a"; ctx.font = "16px sans-serif"; ctx.fillText("Welcome to our website!", 20, 100);
+        ctx.fillStyle = "#56617a"; ctx.font = "12px sans-serif"; ctx.fillText("Click the button below to continue.", 20, 125);
+        ctx.fillStyle = "#3b5bfd"; ctx.fillRect(20, 140, 140, 36); ctx.fillStyle = "#fff"; ctx.font = "14px sans-serif"; ctx.fillText("Click here", 40, 163);
+        ctx.fillStyle = "#c93a3a"; ctx.fillRect(200, 140, 140, 36); ctx.fillStyle = "#fff"; ctx.fillText("Fake button", 215, 163);
+      } else if (type === "phone") {
+        ctx.fillStyle = "#1a2233"; ctx.fillRect(250, 20, 300, 460);
+        ctx.fillStyle = "#fff"; ctx.fillRect(260, 60, 280, 380);
+        ctx.fillStyle = "#3b5bfd"; ctx.fillRect(270, 70, 260, 40);
+        ctx.fillStyle = "#fff"; ctx.font = "14px sans-serif"; ctx.fillText("Settings", 280, 95);
+        ctx.fillStyle = "#f6f8fd"; ctx.fillRect(270, 120, 260, 40); ctx.fillStyle = "#17203a"; ctx.fillText("Display", 280, 145);
+        ctx.fillStyle = "#f6f8fd"; ctx.fillRect(270, 170, 260, 40); ctx.fillText("Sound", 280, 195);
+        ctx.fillStyle = "#f6f8fd"; ctx.fillRect(270, 220, 260, 40); ctx.fillText("Privacy", 280, 245);
+        ctx.fillStyle = "#f6f8fd"; ctx.fillRect(270, 270, 260, 40); ctx.fillText("About", 280, 295);
+      } else if (type === "email") {
+        ctx.fillStyle = "#f0f4fc"; ctx.fillRect(0, 0, 200, 500);
+        ctx.fillStyle = "#17203a"; ctx.font = "14px sans-serif"; ctx.fillText("Inbox", 20, 30);
+        ctx.fillStyle = "#3b5bfd"; ctx.fillRect(10, 45, 180, 30); ctx.fillStyle = "#fff"; ctx.fillText("Compose", 60, 65);
+        ctx.fillStyle = "#fff"; ctx.fillRect(200, 0, 600, 500);
+        ctx.fillStyle = "#17203a"; ctx.font = "16px sans-serif"; ctx.fillText("Inbox (3)", 210, 30);
+        ctx.fillStyle = "#e8edff"; ctx.fillRect(200, 40, 600, 40); ctx.fillStyle = "#17203a"; ctx.font = "13px sans-serif"; ctx.fillText("Grandma Rose — Sunday dinner", 210, 65);
+        ctx.fillStyle = "#fff"; ctx.fillRect(200, 80, 600, 40); ctx.fillText("Prize Center — You won!", 210, 105);
+        ctx.fillStyle = "#fff"; ctx.fillRect(200, 120, 600, 40); ctx.fillText("Weekly Deals — 50% off", 210, 145);
+      }
+      currentImage = c.toDataURL("image/jpeg", 0.85);
+      currentHotspot = null;
+      $("#cb-img").src = currentImage;
+      $("#cb-img").style.display = "block";
+      $("#cb-box").style.display = "none";
+      $("#cb-canvas-hint").textContent = "Template loaded. Click 'Draw hotspot' then drag to mark the click area.";
+      BB.toast("Template loaded!", "good", 1500);
+    }
+
+    $("#cb-tpl-browser").addEventListener("click", () => loadTemplate("browser"));
+    $("#cb-tpl-phone").addEventListener("click", () => loadTemplate("phone"));
+    $("#cb-tpl-email").addEventListener("click", () => loadTemplate("email"));
+
     const canvas = $("#cb-canvas");
     let drawingMode = false;
 
@@ -162,6 +211,45 @@
       $("#cb-caption").value = "";
       renderSteps();
       BB.toast("Cleared.", "info");
+    });
+
+    $("#cb-export").addEventListener("click", () => {
+      const name = $("#cb-name").value.trim() || "Untitled";
+      if (editorSteps.length === 0) { BB.toast("Add steps first.", "warn"); return; }
+      const data = JSON.stringify({ name, steps: editorSteps });
+      // compress via btoa
+      try {
+        const code = btoa(unescape(encodeURIComponent(data)));
+        navigator.clipboard.writeText(code).then(() => {
+          BB.toast("Lesson code copied to clipboard!", "good", 2500);
+        }).catch(() => {
+          // fallback
+          const ta = document.createElement("textarea");
+          ta.value = code;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          ta.remove();
+          BB.toast("Lesson code copied!", "good", 2500);
+        });
+      } catch (e) {
+        BB.toast("Couldn't export.", "bad");
+      }
+    });
+
+    $("#cb-importbtn").addEventListener("click", () => {
+      const code = $("#cb-import").value.trim();
+      if (!code) { BB.toast("Paste a code first.", "warn"); return; }
+      try {
+        const data = JSON.parse(decodeURIComponent(escape(atob(code))));
+        if (!data.steps || !Array.isArray(data.steps)) throw new Error("bad");
+        editorSteps = data.steps;
+        $("#cb-name").value = data.name || "Imported lesson";
+        renderSteps();
+        BB.toast("Imported " + editorSteps.length + " steps!", "good");
+      } catch (e) {
+        BB.toast("Invalid code.", "bad");
+      }
     });
   }
 

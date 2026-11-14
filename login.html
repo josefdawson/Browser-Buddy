@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+
+  <main class="login-wrap">
+    <div class="login-card">
+      <h1>Admin Login 🔐</h1>
+      <p class="muted">Sign in to access the admin panel.</p>
+
+      <label class="cb-label">Email</label>
+      <input type="email" id="login-email" placeholder="you@example.com" class="cb-input">
+
+      <label class="cb-label">Password</label>
+      <input type="password" id="login-pw" placeholder="••••••••" class="cb-input">
+
+      <div class="game-actions" style="margin-top:16px">
+        <button class="btn btn-primary btn-big" id="login-btn">Sign in</button>
+        <a class="btn btn-ghost" href="index.html">Cancel</a>
+      </div>
+
+      <p class="muted" id="login-msg" style="margin-top:12px;color:var(--bad)"></p>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
