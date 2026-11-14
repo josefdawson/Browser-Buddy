@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Support Career Mode — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+  <style>
+    .ts-stage { background: #1a2233; color: #fff; border-radius: 12px; padding: 16px; min-height: 300px; position: relative; overflow: hidden; }
+    .ts-problem { background: #2a2a3e; border: 1px solid #3a3a5e; border-radius: 8px; padding: 10px 12px; margin: 6px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .ts-problem .desc { flex: 1; font-size: .85rem; color: #aab3cc; }
+    .ts-problem button { background: #3b5bfd; color: #fff; border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-family: inherit; font-size: .8rem; font-weight: 600; }
+    .ts-problem button:hover { background: #2a45c9; }
+    .ts-problem.fixed { opacity: .4; text-decoration: line-through; }
+    .ts-patience { background: var(--line); border-radius: 99px; height: 16px; overflow: hidden; margin: 10px 0; }
+    .ts-patience-fill { height: 100%; background: var(--good); border-radius: 99px; transition: width .3s; }
+    .ts-patience-fill.urgent { background: var(--bad); }
+    .ts-caller { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Tech Support Career Mode 📞</h1>
+    <p class="muted">Fix broken screens before the caller's patience runs out!</p>
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="ts-score">0</div><div class="l">Fixed</div></div>
+      <div class="game-stat"><div class="n" id="ts-round">1</div><div class="l">Ticket</div></div>
+      <div class="game-stat"><div class="n" id="ts-streak">0</div><div class="l">Streak</div></div>
+    </div>
+    <div class="game-card">
+      <div class="ts-caller" id="ts-caller"></div>
+      <div class="ts-patience"><div class="ts-patience-fill" id="ts-patience" style="width:100%"></div></div>
+      <p class="mission-plain" id="ts-instr"></p>
+      <div id="ts-stage" class="ts-stage"></div>
+    </div>
+    <div class="game-over" id="ts-over" style="display:none"></div>
+    <div class="game-actions" style="margin-top:16px">
+      <button class="btn btn-primary btn-big" id="ts-startbtn" onclick="if(typeof startGame==='function')startGame();">Start shift</button>
+    </div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="tech-support.js"></script>
+</body>
+</html>

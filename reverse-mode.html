@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse Mode — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+  <style>
+    .rm-wrap { max-width: 900px; margin: 0 auto; padding: 20px 24px 60px; }
+    .rm-canvas { position: relative; background: #f7f9fd; border: 2px solid var(--line); border-radius: 12px; min-height: 320px; padding: 20px; overflow: hidden; }
+    .rm-element { position: absolute; cursor: move; padding: 8px 12px; border-radius: 8px; font-size: .9rem; font-weight: 600; user-select: none; }
+    .rm-element.real { background: #f0f4fc; border: 1px dashed #9bb0d0; }
+    .rm-element.fake { background: #c93a3a; color: #fff; border: 2px solid #8b0000; }
+    .rm-element.fake:hover { background: #a02020; }
+    .rm-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .rm-toolbar button { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #eef2fb; cursor: pointer; font-family: inherit; font-weight: 600; font-size: .85rem; }
+    .rm-toolbar button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .rm-bot { background: #1a2233; color: #fff; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .rm-bot h3 { color: #fff; margin: 0 0 8px; }
+    .rm-bot p { color: #aab3cc; font-size: .9rem; }
+    .rm-bot .bot-action { background: #2a2a3e; border-radius: 8px; padding: 8px 12px; margin: 4px 0; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="rm-wrap">
+    <h1>Reverse Mode 🎭</h1>
+    <p class="muted">Design a tricky download page. Place decoy buttons and fake close icons. Then watch the bot try to navigate it.</p>
+
+    <div class="rm-toolbar">
+      <button id="rm-addreal" onclick="if(typeof addReal==='function')addReal()">➕ Add real download</button>
+      <button id="rm-addfake" onclick="if(typeof addFake==='function')addFake()">🔴 Add fake button</button>
+      <button id="rm-addpopup" onclick="if(typeof addPopup==='function')addPopup()">💬 Add fake pop-up</button>
+      <button id="rm-addcookie" onclick="if(typeof addCookie==='function')addCookie()">🍪 Add cookie banner</button>
+      <button id="rm-addperm" onclick="if(typeof addPerm==='function')addPerm()">🔔 Add permission popup</button>
+      <button id="rm-addscam" onclick="if(typeof addScam==='function')addScam()">📧 Add scam email</button>
+      <button id="rm-clear" onclick="if(typeof clearAll==='function')clearAll()">Clear all</button>
+      <button class="btn btn-primary" id="rm-test" style="padding:8px 16px" onclick="if(typeof testBot==='function')testBot()">▶️ Test with bot</button>
+    </div>
+
+    <div class="rm-canvas" id="rm-canvas">
+      <p style="color:var(--muted);font-size:.9rem">Your fake download page. Add elements above.</p>
+    </div>
+
+    <div class="rm-bot" id="rm-bot" style="display:none">
+      <h3>🤖 Bot "Grandma Rose" is navigating...</h3>
+      <div id="rm-botlog"></div>
+    </div>
+
+    <div class="game-over" id="rm-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="reverse-mode.js"></script>
+</body>
+</html>

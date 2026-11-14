@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Party Mode — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+  <style>
+    .pm-wrap { max-width: 700px; margin: 0 auto; padding: 20px 24px 60px; text-align: center; }
+    .pm-player { font-size: 1.4rem; font-weight: 700; margin: 12px 0; }
+    .pm-player.p1 { color: var(--primary); }
+    .pm-player.p2 { color: var(--good); }
+    .pm-score { font-size: 2.5rem; font-weight: 800; margin: 8px 0; }
+    .pm-vs { font-size: 1.5rem; color: var(--muted); margin: 8px 0; }
+    .pm-result { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 24px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="pm-wrap">
+    <h1>Party Mode 🎉</h1>
+    <p class="muted">2-player local showdown. Take turns and see who's the best!</p>
+
+    <div class="mode-toggle">
+      <button class="mode-btn active" data-game="cookie">Cookie Banner Speedrun</button>
+      <button class="mode-btn" data-game="address">Address Bar vs Search Bar</button>
+    </div>
+
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="pm-p1score">0</div><div class="l">Player 1</div></div>
+      <div class="pm-vs">vs</div>
+      <div class="game-stat"><div class="n" id="pm-p2score">0</div><div class="l">Player 2</div></div>
+    </div>
+
+    <div class="pm-player p1" id="pm-current">Player 1's turn</div>
+    <div class="pm-score" id="pm-score">0</div>
+
+    <div class="game-card" id="pm-game">
+      <p class="mission-plain" id="pm-instr">Click "Start" to begin Player 1's turn.</p>
+      <div id="pm-area" style="min-height:120px;margin-top:10px"></div>
+    </div>
+
+    <div class="game-actions">
+      <button class="btn btn-primary btn-big" id="pm-start">Start turn</button>
+    </div>
+
+    <div class="pm-result" id="pm-result" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="party-mode.js"></script>
+</body>
+</html>

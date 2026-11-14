@@ -36,6 +36,13 @@
           <li>🛡️ <strong>Admin Panel</strong> — manage bans, view live users, generate reward codes.</li>
           <li>📧 <strong>Chat & Phone Apps</strong> — new pretend apps in the simulator with 6 new missions.</li>
           <li>🧩 <strong>Click-Through Builder</strong> — create lessons from screenshots with export/import and templates.</li>
+          <li>🦠 <strong>Mystery Virus Clean-Up</strong> — a new broken computer every round with real apps and windows.</li>
+          <li>🌀 <strong>Roguelike Chaos Mode</strong> — endless waves with upgrades and curses.</li>
+          <li>🎲 <strong>Scam Generator</strong> — procedurally generated scam emails and pop-ups.</li>
+          <li>📞 <strong>Tech Support Career Mode</strong> — fix broken screens before patience runs out.</li>
+          <li>🎭 <strong>Reverse Mode</strong> — design tricky pages and watch a bot navigate them.</li>
+          <li>🐾 <strong>Browser Pet</strong> — adopt a pixel pet, feed and care for it.</li>
+          <li>🎉 <strong>Party Mode</strong> — 2-player pass-and-play speedrun battles.</li>
           <li>🎨 <strong>100x Cooler UI</strong> — glassmorphism, gradients, animations, emoji font fixes.</li>
         </ul>
         <label class="ul-dontshow">

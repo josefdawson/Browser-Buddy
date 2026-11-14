@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystery Virus Clean-Up — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+  <style>
+    .mv-wrap { max-width: 960px; margin: 0 auto; padding: 20px 24px 60px; }
+    .mv-computer { background: #1a2233; border-radius: 16px; padding: 12px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
+    .mv-screen { background: #0d1117; border-radius: 8px; min-height: 420px; position: relative; overflow: hidden; color: #e8ecf7; font-family: "Segoe UI", system-ui, sans-serif; }
+    .mv-desktop { position: absolute; inset: 0; padding: 16px; }
+    .mv-taskbar { position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: #1e2538; display: flex; align-items: center; padding: 0 8px; gap: 6px; border-top: 1px solid #2a3350; }
+    .mv-taskbar button { background: #2a3350; border: none; border-radius: 6px; padding: 6px 10px; color: #e8ecf7; cursor: pointer; font-size: .85rem; font-family: inherit; }
+    .mv-taskbar button:hover { background: #3a4360; }
+    .mv-taskbar .clock { margin-left: auto; font-size: .8rem; color: #aaa; }
+    .mv-window { position: absolute; background: #2a2a3e; border: 1px solid #3a3a5e; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.4); min-width: 280px; }
+    .mv-window .titlebar { background: #1e2538; padding: 6px 10px; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; }
+    .mv-window .titlebar .dots { display: flex; gap: 4px; }
+    .mv-window .titlebar .dots span { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .mv-window .titlebar .close { margin-left: auto; background: #c93a3a; border: none; border-radius: 4px; width: 20px; height: 20px; color: #fff; cursor: pointer; font-weight: 700; font-size: .8rem; }
+    .mv-window .content { padding: 12px; font-size: .85rem; color: #aab3cc; }
+    .mv-icon { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; width: 70px; text-align: center; }
+    .mv-icon .ico { font-size: 2rem; }
+    .mv-icon .label { font-size: .7rem; color: #e8ecf7; }
+    .mv-popup { position: absolute; background: #8b0000; color: #fff; border: 2px solid #ff0000; border-radius: 8px; padding: 12px; width: 260px; z-index: 100; box-shadow: 0 4px 20px rgba(255,0,0,.3); }
+    .mv-popup h4 { margin: 0 0 6px; font-size: .9rem; }
+    .mv-popup p { font-size: .8rem; margin: 0 0 8px; color: #ffd6d6; }
+    .mv-popup button { background: #ff0; color: #000; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; font-size: .8rem; margin-right: 4px; }
+    .mv-popup .real-close { background: #c93a3a; color: #fff; }
+    .mv-audio { position: absolute; top: 10px; right: 10px; background: #c93a3a; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: .75rem; animation: pulse 1s infinite; }
+    .mv-progress { background: #2a2a3e; border-radius: 99px; height: 6px; margin: 8px 0; overflow: hidden; }
+    .mv-progress-fill { height: 100%; background: #178a4c; border-radius: 99px; transition: width .3s; }
+    .mv-hud { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="mv-wrap">
+    <h1>Mystery Virus Clean-Up 🦠</h1>
+    <p class="muted">A broken computer every round. Fix the viruses, close pop-ups, clean storage, and more before time runs out!</p>
+    <div class="mv-hud">
+      <div class="game-stat"><div class="n" id="mv-streak">0</div><div class="l">Computers fixed</div></div>
+      <div class="game-stat"><div class="n" id="mv-round">1</div><div class="l">Round</div></div>
+      <div class="game-stat timer" id="mv-timer"><div class="n" id="mv-time">45</div><div class="l">Seconds</div></div>
+    </div>
+    <div class="mv-computer">
+      <div class="mv-screen" id="mv-screen">
+        <div class="mv-desktop" id="mv-desktop"></div>
+        <div class="mv-taskbar">
+          <button data-app="browser">🌐 Browser</button>
+          <button data-app="email">📧 Email</button>
+          <button data-app="files">📁 Files</button>
+          <button data-app="settings">⚙️ Settings</button>
+          <span class="clock" id="mv-clock">12:00</span>
+        </div>
+      </div>
+    </div>
+    <p class="mission-plain" id="mv-instr" style="margin-top:12px">Fix all the problems on this computer.</p>
+    <div id="mv-problems" style="margin-top:8px"></div>
+    <div class="game-over" id="mv-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="mystery-virus.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam Generator — Browser Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game.css">
+  <style>
+    .sg-scene { background: #f7f9fd; border: 2px solid var(--line); border-radius: 12px; padding: 16px; min-height: 200px; }
+    .sg-email { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+    .sg-email .from { color: var(--bad); font-weight: 700; font-size: .85rem; }
+    .sg-email .subject { font-weight: 700; margin: 6px 0; }
+    .sg-email .body { color: var(--muted); font-size: .9rem; margin: 8px 0; }
+    .sg-email .link { color: var(--primary); text-decoration: underline; cursor: pointer; font-size: .85rem; }
+    .sg-popup { background: #fff; border: 2px solid #ffb020; border-radius: 10px; padding: 16px; text-align: center; }
+    .sg-popup h3 { color: #c93a3a; margin: 0 0 8px; }
+    .sg-popup .bigbtn { background: #c93a3a; color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; display: inline-block; margin-top: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">🧭</span> Browser Buddy</a>
+    <div class="topbar-right">
+      <label class="jargon-toggle"><input type="checkbox" id="jargon-toggle"><span>Use everyday words</span></label>
+      <span class="progress-chip" id="progress-chip">0 missions done</span>
+    </div>
+  </header>
+  <main class="scam-wrap">
+    <h1>Scam Generator 🎲</h1>
+    <p class="muted">Procedurally generated scam emails and pop-ups. Can you spot them all?</p>
+    <div class="game-hud">
+      <div class="game-stat"><div class="n" id="sg-score">0</div><div class="l">Correct</div></div>
+      <div class="game-stat"><div class="n" id="sg-streak">0</div><div class="l">Streak</div></div>
+      <div class="game-stat"><div class="n" id="sg-round">1</div><div class="l">Round</div></div>
+    </div>
+    <div class="game-card">
+      <p class="mission-plain" id="sg-instr">Is this a scam or safe?</p>
+      <div class="sg-scene" id="sg-scene"></div>
+      <div class="game-actions" style="margin-top:12px">
+        <button class="btn btn-primary" id="sg-scam">🚨 Scam</button>
+        <button class="btn btn-ghost" id="sg-safe">✅ Safe</button>
+      </div>
+      <div class="id-quiz-feedback" id="sg-feedback"></div>
+    </div>
+    <div class="game-over" id="sg-over" style="display:none"></div>
+  </main>
+  <script src="app.js"></script>
+  <script src="sound.js"></script>
+  <script src="scam-generator.js"></script>
+</body>
+</html>
