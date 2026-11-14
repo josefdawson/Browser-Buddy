@@ -15,6 +15,9 @@
   }
 
   function showUpdateLog() {
+    // Only show on the home page
+    const page = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+    if (page !== "index.html" && page !== "") return;
     if (isDismissed()) return;
 
     const overlay = document.createElement("div");
@@ -48,11 +51,18 @@
     const dontShow = overlay.querySelector("#ul-dontshow");
 
     function close() {
-      if (dontShow.checked) setDismissed();
+      // Always dismiss permanently (whether checkbox is checked or not)
+      setDismissed();
       overlay.remove();
     }
 
-    closeBtn.addEventListener("click", close);
+    closeBtn.style.pointerEvents = "auto";
+    closeBtn.style.zIndex = "10";
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      close();
+    });
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) close();
     });

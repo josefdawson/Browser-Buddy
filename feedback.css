@@ -1,0 +1,3 @@
+/* Feedback modal (reuses update-log overlay styles) */
+.feedback-link { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 600; padding: 6px 10px; border-radius: 10px; transition: background .15s, color .15s; cursor: pointer; }
+.feedback-link:hover { background: #eef2fb; color: var(--primary-dark); }

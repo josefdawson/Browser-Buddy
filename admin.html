@@ -6,6 +6,7 @@
   <title>Admin Panel — Browser Buddy</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="update-log.css">
+  <link rel="stylesheet" href="feedback.css">
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -54,6 +55,12 @@
     </div>
 
     <div class="admin-card">
+      <h2>User Feedback <span class="admin-badge" id="admin-feedbackcount">0</span></h2>
+      <p class="muted">Messages from users.</p>
+      <div id="admin-feedbacklist" class="admin-list"></div>
+    </div>
+
+    <div class="admin-card">
       <h2>Site Stats</h2>
       <div id="admin-stats"></div>
     </div>
@@ -78,6 +85,7 @@
 <script src="app.js"></script>
 <script src="sound.js"></script>
 <script src="update-log.js"></script>
+<script src="feedback.js"></script>
 <script src="presence.js"></script>
   <script src="admin.js"></script>
 </body>

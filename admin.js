@@ -71,6 +71,30 @@
   }
 
   /* ---------- Stats ---------- */
+  function getFeedback() { try { return JSON.parse(localStorage.getItem("bb-feedback") || "[]"); } catch (e) { return []; } }
+
+  function renderFeedback() {
+    const list = getFeedback();
+    $("#admin-feedbackcount").textContent = list.length;
+    const el = $("#admin-feedbacklist");
+    if (list.length === 0) { el.innerHTML = '<p class="muted">No feedback yet.</p>'; return; }
+    el.innerHTML = list.map((f, i) => '<div class="admin-item" style="flex-direction:column;align-items:flex-start;gap:4px">' +
+      '<div style="display:flex;justify-content:space-between;width:100%"><strong>' + (f.name || "Anonymous") + '</strong><span style="color:var(--muted);font-size:.8rem">' + new Date(f.date).toLocaleString() + '</span></div>' +
+      '<div style="color:var(--muted);font-size:.8rem">Page: ' + (f.page || "unknown") + '</div>' +
+      '<div style="margin-top:4px">' + f.message + '</div>' +
+      '<button class="remove" data-i="' + i + '" style="align-self:flex-end;margin-top:4px">Delete</button>' +
+      '</div>').join("");
+    el.querySelectorAll("[data-i]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const list = getFeedback();
+        list.splice(parseInt(b.dataset.i, 10), 1);
+        try { localStorage.setItem("bb-feedback", JSON.stringify(list)); } catch (e) {}
+        renderFeedback();
+        BB.toast("Deleted.", "info");
+      });
+    });
+  }
+
   function renderStats() {
     const banned = getBanned();
     const progress = (function () { try { return JSON.parse(localStorage.getItem("bb-progress") || "[]"); } catch (e) { return []; } })();
@@ -87,6 +111,7 @@
     initLiveUsers();
     renderBanned();
     renderLive();
+    renderFeedback();
     renderStats();
 
     // Refresh stats every 10s (live users update via Firebase callback)
