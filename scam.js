@@ -287,7 +287,8 @@
       "<p>You got <strong>" + score + " of " + SCENARIOS.length + "</strong> right (" + pct + "%).</p>" +
       "<p>" + msg + "</p>" +
       "<p>Best streak: <strong>" + bestStreak + "</strong></p>" +
-      '<div class="scam-actions"><button class="btn btn-primary btn-big" id="scam-replay">Play again</button></div>';
+      '<div class="scam-actions"><button class="btn btn-primary btn-big" id="scam-replay">Play again</button><button class="btn btn-ghost" id="scam-share">📤 Share score</button></div>';
+    $("#scam-share").addEventListener("click", () => shareScore("Scam or Safe?", score, SCENARIOS.length));
     $("#scam-replay").addEventListener("click", () => {
       $("#scam-over").style.display = "none";
       $("#scam-card").style.display = "block";

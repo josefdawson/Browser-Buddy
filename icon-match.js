@@ -127,7 +127,8 @@
     if (pct >= 90) msg = "Excellent! You know your icons.";
     else if (pct >= 70) msg = "Nice work. A few more rounds.";
     else if (pct >= 50) msg = "Halfway. Try again to build speed.";
-    over.innerHTML = '<div class="big">🎉</div><h2>Done!</h2><p>You got <strong>' + score + ' of ' + total + '</strong> right (' + pct + '%).</p><p>Best streak: <strong>' + bestStreak + '</strong></p><p>' + msg + '</p><div class="game-actions"><button class="btn btn-primary btn-big" id="im-replay">Play again</button></div>';
+    over.innerHTML = '<div class="big">🎉</div><h2>Done!</h2><p>You got <strong>' + score + ' of ' + total + '</strong> right (' + pct + '%).</p><p>Best streak: <strong>' + bestStreak + '</strong></p><p>' + msg + '</p><div class="game-actions"><button class="btn btn-primary btn-big" id="im-replay">Play again</button><button class="btn btn-ghost" id="im-share">📤 Share score</button></div>';
+    $("#im-share").addEventListener("click", () => shareScore("Icon Match", score, total));
     $("#im-replay").addEventListener("click", startGame);
   }
 

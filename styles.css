@@ -11,26 +11,52 @@ body.cursor-star { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 body.cursor-heart { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ctext y='20' font-size='20'>❤️</text%3E%3C/svg%3E") 0 0, auto; }
 
 /* =========================================================
+   Browser Buddy — micro-interactions & animations
+   ========================================================= */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.module-card { animation: fade-in-up .4s ease both; }
+.module-card:nth-child(2) { animation-delay: .05s; }
+.module-card:nth-child(3) { animation-delay: .1s; }
+.module-card:nth-child(4) { animation-delay: .15s; }
+.module-card:nth-child(5) { animation-delay: .2s; }
+.btn { transition: all .2s cubic-bezier(.4, 0, .2, 1); }
+.btn:active { transform: scale(0.97); }
+.id-tile, .mission-item, .scam-option { transition: transform .15s ease, box-shadow .15s ease; }
+.id-tile:active, .mission-item:active { transform: scale(0.98); }
+
+/* =========================================================
    Browser Buddy — shared styles (home page, header, toast, hints)
    ========================================================= */
 
 * { box-sizing: border-box; }
 
 :root {
-  --bg: #eef2f9;
-  --surface: #ffffff;
-  --ink: #17203a;
-  --muted: #56617a;
-  --line: #dfe5f0;
-  --primary: #3b5bfd;
+  /* 60-30-10 color rule */
+  --bg: #f0f2f5;        /* 60% - dominant background */
+  --surface: #ffffff;    /* 30% - secondary surface/cards */
+  --ink: #1a1a2e;        /* text */
+  --muted: #6b7280;      /* muted text */
+  --line: #e5e7eb;       /* borders */
+  --primary: #3b5bfd;    /* 10% - accent (primary actions) */
   --primary-dark: #2a45c9;
-  --accent: #ffb020;
+  --accent: #ffb020;     /* accent highlight */
   --good: #178a4c;
   --bad: #c93a3a;
   --hint: #ff7a00;
   --radius: 14px;
-  --shadow: 0 2px 10px rgba(23, 32, 58, .08);
-  --shadow-lg: 0 8px 28px rgba(23, 32, 58, .16);
+  --shadow: 0 2px 10px rgba(23, 32, 58, .06);
+  --shadow-lg: 0 8px 28px rgba(23, 32, 58, .12);
 }
 
 html { font-size: 18px; }
@@ -208,8 +234,8 @@ p { margin: 0 0 1em; }
 .btn:hover::after { opacity: 1; }
 .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 4px 15px rgba(59,91,253,.3); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,91,253,.4); }
-.btn-ghost { background: rgba(255,255,255,.8); border-color: var(--line); color: var(--ink); backdrop-filter: blur(4px); }
-.btn-ghost:hover { border-color: var(--primary); color: var(--primary-dark); transform: translateY(-1px); }
+.btn-ghost { background: #e8edf7; border-color: #c9d2e4; color: var(--primary-dark); font-weight: 600; }
+.btn-ghost:hover { background: #dce3f5; border-color: var(--primary); color: var(--primary-dark); transform: translateY(-1px); }
 .btn-big { padding: 14px 24px; font-size: 1.05rem; }
 .btn-disabled { opacity: .55; cursor: not-allowed; }
 .btn-disabled:hover { border-color: var(--line); color: var(--ink); }

@@ -64,18 +64,21 @@
       <div class="sm-lesson" id="sm-lesson" style="display:none"></div>
     </div>
 
-    <div class="sm-chapter2" id="sm-chapter2">
-      <div class="lock">🔒</div>
-      <h2>Chapter 2 — Coming in v1.2 beta</h2>
-      <p>Unlock the next chapter with new stories, real photos, and advanced challenges.</p>
-      <img class="preview-img" src="https://placehold.co/400x200/3b5bfd/ffffff?text=Chapter+2+Preview" alt="Chapter 2 preview">
-      <p class="coming-soon">Coming soon in Browser Buddy v1.2 beta!</p>
-      <p style="font-size:.85rem;color:#7a8ab0;margin-top:8px">New stories: Help a friend set up a smart home, navigate a hospital portal, and more.</p>
+    <div class="sm-chapter2" id="sm-chapter2" style="display:none">
+      <div class="lock" id="ch2-lock">🔓</div>
+      <h2 id="ch2-title">Chapter 2 — Now Available!</h2>
+      <p id="ch2-desc">New stories with real photos and advanced challenges. Play Chapter 2 now!</p>
+      <p class="coming-soon" id="ch2-status" style="color:var(--good)">Chapter 2 unlocked in v1.2!</p>
+      <div id="ch2-admin">
+        <button class="unlock-btn" id="ch2-play">Play Chapter 2</button>
+      </div>
     </div>
 
     <div class="game-over" id="sm-over" style="display:none"></div>
   </main>
   <script src="app.js"></script>
+<script src="hooks.js"></script>
+<script src="content-drip.js"></script>
   <script src="sound.js"></script>
   <script src="story-mode.js"></script>
 </body>

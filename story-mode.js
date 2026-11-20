@@ -94,8 +94,204 @@
     },
   ];
 
+  // Chapter 2 stories (admin only)
+  const CHAPTER2_STORIES = [
+    {
+      title: "Help a friend set up a smart home",
+      avatar: "\u{1F9D1}", name: "Friend Sam",
+      steps: [
+        { dialogue: "I just got a smart speaker. How do I set it up?", scene: "A new smart speaker is on the table.", ui: '<div class="row"><button data-act="plug">Plug it in</button><button data-act="app">Open the app</button><button data-act="wifi">Connect to Wi-Fi</button></div>', action: "plug", lesson: "First, plug in the device and power it on.", hint: "What's the first step for any new device?", feedback: "Plugged in! The light is blinking." },
+        { dialogue: "It's on! Now what?", scene: "The speaker's light is blinking blue.", ui: '<div class="row"><button data-act="app2">Open the companion app</button><button data-act="wifi2">Connect to Wi-Fi</button><button data-act="name">Name the device</button></div>', action: "app2", lesson: "Open the app that came with the device.", hint: "Which app controls the speaker?", feedback: "App opened! It found the speaker." },
+        { dialogue: "The app found it. How do I connect to Wi-Fi?", scene: "The app shows the speaker.", ui: '<div class="row"><button data-act="wifi3">Select your Wi-Fi network</button><button data-act="password">Enter password</button><button data-act="skip">Skip Wi-Fi</button></div>', action: "wifi3", lesson: "Select your home Wi-Fi network.", hint: "Which network is yours?", feedback: "Wi-Fi selected!" },
+        { dialogue: "It's asking for the Wi-Fi password.", scene: "Password prompt.", ui: '<div class="row"><input id="sm-wifi" placeholder="Wi-Fi password" style="flex:1"><button data-act="connect">Connect</button></div>', action: "connect", validate: () => document.querySelector("#sm-wifi").value.trim() !== "", onAction: () => { if (!document.querySelector("#sm-wifi").value.trim()) document.querySelector("#sm-wifi").value = "MyHomeWiFi123"; }, lesson: "Type the Wi-Fi password from your router.", hint: "Type the password, then connect.", feedback: "Connected! Smart speaker is online." },
+        { dialogue: "How do I make it play music?", scene: "The speaker is connected.", ui: '<div class="row"><button data-act="voice">Say a voice command</button><button data-act="app3">Open the app</button><button data-act="manual">Press a button on the speaker</button></div>', action: "voice", lesson: "Voice commands control smart speakers.", hint: "How do you talk to a smart speaker?", feedback: "It's listening! Say 'Play music'." },
+        { dialogue: "It's working! How do I turn it off at night?", scene: "The speaker is playing music.", ui: '<div class="row"><button data-act="mute">Mute the speaker</button><button data-act="unplug">Unplug it</button><button data-act="schedule">Set a schedule</button></div>', action: "schedule", lesson: "Schedules can auto-mute at bedtime.", hint: "What's the smartest way to handle nighttime?", feedback: "Schedule set! It'll be quiet at night." },
+      ],
+    },
+    {
+      title: "Help a friend navigate a hospital portal",
+      avatar: "\u{1F3E5}", name: "Patient Pat",
+      steps: [
+        { dialogue: "I need to check my test results online. How do I log in?", scene: "The hospital portal login page.", ui: '<div class="row"><input placeholder="Username" style="flex:1"><input type="password" placeholder="Password" style="flex:1"><button data-act="login">Log in</button></div>', action: "login", validate: () => true, lesson: "Use your patient portal username and password.", hint: "Enter your credentials and click Log in.", feedback: "Logged in! Welcome to your portal." },
+        { dialogue: "Where are my test results?", scene: "The portal dashboard.", ui: '<div class="row"><button data-act="results">Lab Results</button><button data-act="appointments">Appointments</button><button data-act="messages">Messages</button><button data-act="billing">Billing</button></div>', action: "results", lesson: "Lab Results shows your test results.", hint: "Which section has test results?", feedback: "Lab Results opened!" },
+        { dialogue: "I see a list of tests. How do I view one?", scene: "Lab results list.", ui: '<div class="row"><button data-act="view">View latest result</button><button data-act="download">Download PDF</button><button data-act="share">Share with doctor</button></div>', action: "view", lesson: "Click to view the result details.", hint: "Which button shows the details?", feedback: "Result displayed!" },
+        { dialogue: "The results show numbers. What do they mean?", scene: "Test results with reference ranges.", ui: '<div class="row"><button data-act="range">Check reference ranges</button><button data-act="google">Google the values</button><button data-act="call">Call the doctor</button></div>', action: "range", lesson: "Reference ranges show normal values. Compare your results.", hint: "What helps you understand the numbers?", feedback: "Ranges highlighted. Compare your values." },
+        { dialogue: "I want to message my doctor about the results.", scene: "The portal has a messaging section.", ui: '<div class="row"><button data-act="newmsg">New message</button><button data-act="inbox">Check inbox</button><button data-act="reply">Reply to last</button></div>', action: "newmsg", lesson: "New message lets you contact your doctor.", hint: "Which button starts a new message?", feedback: "New message form opened!" },
+        { dialogue: "How do I log out safely?", scene: "You're done with the portal.", ui: '<div class="row"><button data-act="logout">Log out</button><button data-act="close">Close browser</button><button data-act="minimize">Minimize</button></div>', action: "logout", lesson: "Always log out of health portals.", hint: "Which option securely ends your session?", feedback: "Logged out! Your health info is safe." },
+      ],
+    },
+    {
+      title: "Help a friend book a flight online",
+      avatar: "\u{2708}\u{FE0F}", name: "Traveler Tina",
+      steps: [
+        { dialogue: "I need to book a flight. Where do I start?", scene: "A travel website.", ui: '<div class="row"><button data-act="search">Search flights</button><button data-act="deals">View deals</button><button data-act="account">My account</button></div>', action: "search", lesson: "Search flights lets you find available flights.", hint: "Which button finds flights?", feedback: "Flight search opened!" },
+        { dialogue: "I need to enter where I'm going.", scene: "Flight search form.", ui: '<div class="row"><input placeholder="From: NYC" style="flex:1"><input placeholder="To: LAX" style="flex:1"><button data-act="swap">Swap ↕</button></div><div class="row"><button data-act="next">Search flights</button></div>', action: "next", validate: () => true, lesson: "Enter departure and arrival cities.", hint: "Fill in both cities, then search.", feedback: "Searching for flights..." },
+        { dialogue: "There are so many options! How do I pick?", scene: "Flight results page.", ui: '<div class="row"><button data-act="cheapest">Sort by price</button><button data-act="fastest">Sort by time</button><button data-act="direct">Filter direct only</button></div>', action: "cheapest", lesson: "Sort by price to find the best deal.", hint: "Which sort helps you save money?", feedback: "Sorted by price. Cheapest first!" },
+        { dialogue: "I found a good flight. How do I book it?", scene: "Flight details page.", ui: '<div class="row"><button data-act="select">Select this flight</button><button data-act="compare">Compare with others</button><button data-act="back">Go back</button></div>', action: "select", lesson: "Select the flight to proceed to booking.", hint: "Which button picks this flight?", feedback: "Flight selected!" },
+        { dialogue: "It's asking for passenger details.", scene: "Passenger info form.", ui: '<div class="row"><input placeholder="First name" style="flex:1"><input placeholder="Last name" style="flex:1"><input placeholder="Date of birth" style="flex:1"></div><div class="row"><button data-act="continue">Continue to payment</button></div>', action: "continue", validate: () => true, lesson: "Enter passenger details carefully — they must match your ID.", hint: "Fill in all fields, then continue.", feedback: "Details saved!" },
+        { dialogue: "Now it wants my credit card. Is this safe?", scene: "Payment page.", ui: '<div class="row"><button data-act="checkurl">Check the URL (https://)</button><button data-act="pay">Pay now</button><button data-act="cancel">Cancel booking</button></div>', action: "checkurl", lesson: "Always check for https:// before entering payment info.", hint: "What should you verify first?", feedback: "URL is secure. Safe to pay!" },
+        { dialogue: "I booked it! How do I get my boarding pass?", scene: "Booking confirmation.", ui: '<div class="row"><button data-act="email">Email boarding pass</button><button data-act="download">Download PDF</button><button data-act="app">Save to wallet app</button></div>', action: "download", lesson: "Download or email your boarding pass. Save it offline.", hint: "Which option gives you a file you can access offline?", feedback: "Boarding pass saved! You're ready to fly." },
+      ],
+    },
+  ];
+
   let storyIdx = 0, stepIdx = 0, score = 0, total = STORIES.length;
-  let answered = false, mode = "practice";
+  let answered = false, mode = "practice", chapter = 1;
+
+  function getStories() {
+    if (chapter === 2) return CHAPTER2_STORIES;
+    return STORIES;
+  }
+
+  function loadStory() {
+    stepIdx = 0;
+    const stories = getStories();
+    total = stories.length;
+    const story = stories[storyIdx];
+    $("#sm-avatar").textContent = story.avatar;
+    $("#sm-name").textContent = story.name;
+    $("#sm-round").textContent = (storyIdx + 1) + " / " + total;
+    $("#sm-score").textContent = score;
+    $("#sm-chapter2").style.display = (chapter === 1 && storyIdx === stories.length - 1) ? "block" : "none";
+    loadStep();
+  }
+
+  function loadStep() {
+    const stories = getStories();
+    const story = stories[storyIdx];
+    const step = story.steps[stepIdx];
+    answered = false;
+    $("#sm-progress").textContent = "Step " + (stepIdx + 1) + " of " + story.steps.length;
+    $("#sm-dialogue").textContent = story.name + ": " + step.dialogue;
+    $("#sm-scene").textContent = step.scene;
+    $("#sm-lesson").style.display = "none";
+    $("#sm-lesson").textContent = "";
+    $("#sm-hint").textContent = mode === "practice" ? "Hint: " + step.hint : "";
+    const scene = $("#sm-scene");
+    const uiDiv = document.createElement("div");
+    uiDiv.className = "sm-ui";
+    uiDiv.innerHTML = step.ui;
+    // shuffle buttons
+    uiDiv.querySelectorAll(".row").forEach((row) => {
+      const btns = Array.from(row.querySelectorAll("button[data-act]"));
+      if (btns.length <= 1) return;
+      for (let i = btns.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [btns[i], btns[j]] = [btns[j], btns[i]];
+      }
+      btns.forEach((b) => row.appendChild(b));
+    });
+    scene.appendChild(uiDiv);
+    Array.from(uiDiv.querySelectorAll("[data-act]")).forEach((el) => {
+      el.addEventListener("click", () => handleAction(el, step));
+    });
+    const inputs = uiDiv.querySelectorAll("input, textarea, select");
+    inputs.forEach((inp) => { inp.addEventListener("change", () => {}); });
+    if (step.validate && !uiDiv.querySelector('[data-act="submit"]') && !uiDiv.querySelector('[data-act="send"]') && !uiDiv.querySelector('[data-act="send2"]')) {
+      const btn = document.createElement("button");
+      btn.setAttribute("data-act", "submit");
+      btn.textContent = "Done";
+      btn.className = "btn btn-primary";
+      btn.style.marginTop = "8px";
+      uiDiv.appendChild(btn);
+      btn.addEventListener("click", () => handleAction(btn, step));
+    }
+    if (typeof Sound !== "undefined") Sound.speak(story.name + " says: " + step.dialogue);
+  }
+
+  function handleAction(el, step) {
+    if (answered) return;
+    const act = el.getAttribute("data-act");
+    const expected = step.action.replace('[data-act="', "").replace('"]', "");
+    if (step.validate) {
+      if (!step.validate()) {
+        if (step.onAction) step.onAction();
+        if (!step.validate()) {
+          if (typeof Sound !== "undefined") Sound.error();
+          BB.toast("Fill in all the fields first.", "warn");
+          return;
+        }
+      }
+    }
+    if (act === expected) {
+      answered = true;
+      if (typeof Sound !== "undefined") Sound.success();
+      $("#sm-lesson").textContent = "Lesson: " + step.lesson;
+      $("#sm-lesson").style.display = "block";
+      BB.toast("Correct! " + (step.feedback || ""), "good", 1500);
+      stepIdx++;
+      const stories = getStories();
+      if (stepIdx >= stories[storyIdx].steps.length) {
+        setTimeout(() => {
+          score++;
+          $("#sm-score").textContent = score;
+          if (typeof Sound !== "undefined") { Sound.complete(); Sound.confetti(); Sound.speak("Great job! You helped " + stories[storyIdx].name + "."); }
+          storyIdx++;
+          if (storyIdx >= total) { endGame(); return; }
+          $("#sm-round").textContent = (storyIdx + 1) + " / " + total;
+          loadStory();
+        }, 1800);
+      } else {
+        setTimeout(loadStep, 1800);
+      }
+    } else {
+      if (typeof Sound !== "undefined") Sound.error();
+      BB.toast("Not quite. " + step.hint, "warn", 2000);
+    }
+  }
+
+  function endGame() {
+    const over = $("#sm-over");
+    over.style.display = "block";
+    const pct = Math.round((score / total) * 100);
+    let msg = "Good start.";
+    if (pct >= 90) msg = "Excellent! You're a great helper.";
+    else if (pct >= 70) msg = "Nice work.";
+    else if (pct >= 50) msg = "Halfway. Try again.";
+    over.innerHTML = '<div class="big">\u{1F389}</div><h2>Done!</h2><p>Completed <strong>' + score + ' of ' + total + '</strong> stories (' + pct + '%).</p><p>' + msg + '</p><div class="game-actions"><button class="btn btn-primary btn-big" id="sm-replay">Play again</button></div>';
+    $("#sm-replay").addEventListener("click", () => {
+      over.style.display = "none";
+      storyIdx = 0; stepIdx = 0; score = 0;
+      $("#sm-score").textContent = "0";
+      $("#sm-round").textContent = "1 / " + total;
+      loadStory();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Chapter 2 unlock
+    const ch2 = $("#sm-chapter2");
+    if (ch2) {
+      ch2.style.display = "block";
+      const playBtn = $("#ch2-play");
+      if (playBtn) playBtn.addEventListener("click", () => {
+        chapter = 2;
+        storyIdx = 0; stepIdx = 0; score = 0;
+        const stories = getStories();
+        total = stories.length;
+        $("#sm-round").textContent = "1 / " + total;
+        $("#sm-score").textContent = "0";
+        $("#sm-over").style.display = "none";
+        loadStory();
+        BB.toast("Chapter 2 loaded! " + stories.length + " new stories.", "good", 2000);
+      });
+    }
+
+    Array.from(document.querySelectorAll(".mode-btn")).forEach((b) => {
+      b.addEventListener("click", () => {
+        Array.from(document.querySelectorAll(".mode-btn")).forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        mode = b.dataset.mode;
+      });
+    });
+    const btn = document.createElement("button");
+    btn.className = "btn btn-primary btn-big";
+    btn.textContent = "Start story mode";
+    btn.addEventListener("click", () => { btn.style.display = "none"; loadStory(); });
+    document.querySelector("main").appendChild(btn);
+  });
+})();
+
 
   function loadStory() {
     stepIdx = 0;
@@ -209,6 +405,7 @@
     });
   }
 
+
   document.addEventListener("DOMContentLoaded", () => {
     Array.from(document.querySelectorAll(".mode-btn")).forEach((b) => {
       b.addEventListener("click", () => {
@@ -223,4 +420,3 @@
     btn.addEventListener("click", () => { btn.style.display = "none"; loadStory(); });
     document.querySelector("main").appendChild(btn);
   });
-})();

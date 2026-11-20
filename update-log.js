@@ -26,7 +26,7 @@
       <div class="ul-modal">
         <button class="ul-close" id="ul-close" aria-label="Close">×</button>
         <h2>What's New in Browser Buddy</h2>
-        <div class="ul-version">Version 1.1 beta — Updated</div>
+        <div class="ul-version">Version 1.2 — Updated</div>
         <ul>
           <li>📅 <strong>Daily Tech Challenge</strong> — one new scenario every day. Build your streak!</li>
           <li>🏆 <strong>Trophy Room</strong> — track lifetime stats and earn 8 achievement badges.</li>
